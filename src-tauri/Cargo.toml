@@ -3,6 +3,7 @@ name = "cleannotes"
 version = "0.1.0"
 description = "CleanNotes: bloco de notas em Markdown para quem trabalha com TI"
 authors = ["cleandev"]
+license = "MIT"
 edition = "2021"
 
 [lib]

@@ -85,11 +85,9 @@ cargo --version
 ### Passo 2: baixe o projeto
 
 ```bash
-git clone https://github.com/SEU-USUARIO/cleannotes.git
-cd cleannotes
+git clone https://github.com/danilocesarmendes/CleanNotes.git
+cd CleanNotes
 ```
-
-> Troque `SEU-USUARIO` pelo usuário (ou organização) do GitHub onde o projeto está.
 
 ### Passo 3: instale as dependências
 
@@ -250,7 +248,7 @@ Renomear ou mover uma aba move o arquivo; renomear um projeto renomeia a pasta. 
 ## Para quem quer mexer no código
 
 ```
-cleannotes/
+CleanNotes/
 ├── package.json              scripts: dev, build, dev:web, build:web, test:front
 ├── vite.config.js            Vite: raiz em src/, saída em dist/ (porta 1420)
 ├── install.sh                instalador para Ubuntu/Debian
@@ -287,3 +285,9 @@ cd src-tauri && cargo test -- --ignored   # + cofre real do sistema (rode no seu
 **Para contribuir:** crie um branch, faça a mudança, rode os testes acima e abra um Pull Request descrevendo o que mudou e como testar. Mudanças no formato dos arquivos (`workspace.json`) pedem cuidado: quem já usa o app não pode perder notas.
 
 **Ícones:** `app-icon.png` é o ícone base; `npx tauri icon app-icon.png` regenera os ícones.
+
+---
+
+## Licença
+
+Distribuído sob a licença [MIT](LICENSE). Você pode usar, copiar, modificar e distribuir, mantendo o aviso de copyright.
