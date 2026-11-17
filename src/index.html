@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CleanNotes</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="top-row">
+      <div class="brand">CleanNotes</div>
+      <div class="proj">
+        <button class="proj-btn" id="projBtn" aria-haspopup="menu" aria-expanded="false" title="Projetos (Alt+0 mostra todos; Alt+1 a 9 escolhem um projeto)"></button>
+        <div class="pmenu" id="projMenu" role="menu" aria-label="Projetos" hidden></div>
+      </div>
+      <div class="proj env">
+        <button class="proj-btn" id="envBtn" aria-haspopup="menu" aria-expanded="false" title="Ambiente de variáveis: troca o valor das {{variáveis}} ao copiar (Alt+E)"></button>
+        <div class="pmenu" id="envMenu" role="menu" aria-label="Ambientes" hidden></div>
+      </div>
+      <div class="spacer"></div>
+      <div class="seg" role="group" aria-label="Visualização (Alt+P alterna)">
+        <button data-mode="editor" aria-pressed="false">Editor</button>
+        <button data-mode="split" aria-pressed="true">Lado a lado</button>
+        <button data-mode="preview" aria-pressed="false">Preview</button>
+      </div>
+      <div class="search">
+        <input id="q" type="search" placeholder="Buscar em todos os projetos" aria-label="Buscar em todos os projetos" autocomplete="off">
+        <kbd>Ctrl K</kbd>
+        <div class="results" id="results" hidden role="listbox"></div>
+      </div>
+      <button class="icon-btn" id="helpBtn" title="Primeiros passos: tour guiado (F1)" aria-label="Primeiros passos">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.3"/><path d="M6.1 6.2a2 2 0 1 1 2.9 1.8c-.7.4-1 .8-1 1.5M8 11.6v.1"/></svg>
+      </button>
+      <button class="icon-btn" id="trashBtn" title="Lixeira: abas fechadas" aria-label="Lixeira">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 4.5h11M6 4.5V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5M4 4.5l.6 8.2a1 1 0 0 0 1 .8h4.8a1 1 0 0 0 1-.8l.6-8.2M6.7 7v4M9.3 7v4"/></svg>
+      </button>
+      <button class="icon-btn" id="settingsBtn" title="Configurações" aria-label="Configurações">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M12.6 3.4l-1.3 1.3M4.7 11.3l-1.3 1.3"/></svg>
+      </button>
+    </div>
+    <div class="tab-row">
+      <div class="tabs" id="tabs" role="tablist" aria-label="Abas"></div>
+      <button class="new-tab" id="newTab" title="Nova aba (Alt+N)" aria-label="Nova aba">+</button>
+      <button class="new-tab import" id="importTab" title="Importar um arquivo .md como nova aba" aria-label="Importar arquivo .md">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v8M4.8 7.2L8 10.4l3.2-3.2M3 13h10"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="panes" id="panes" data-mode="split">
+    <main class="editor" id="editor"></main>
+    <section class="preview" id="pv" aria-label="Visualização do Markdown"><div id="pvIn"></div></section>
+    <div class="empty" id="empty" hidden>
+      <p id="emptyMsg">Nenhuma aba aberta. Crie uma aba com o nome de um projeto, cliente ou ambiente para começar a anotar.</p>
+      <button class="btn primary" id="emptyNew">Criar aba</button>
+    </div>
+  </div>
+
+  <footer class="status">
+    <div class="left"><span id="pos">Ln 1, Col 1</span><span id="blkCount"></span><span id="fileInfo"></span></div>
+    <div class="right">
+      <span class="hints"><span><kbd>Alt C</kbd> copia a linha</span><span><kbd>Alt B</kbd> copia o bloco</span><span><kbd>Alt P</kbd> alterna a visualização</span><span><kbd>Ctrl F</kbd> busca na aba</span><span><kbd>Alt N</kbd> nova aba</span><span><kbd>Alt 0-9</kbd> projetos</span></span>
+      <span id="saveState">Salvo</span>
+    </div>
+  </footer>
+</div>
+
+<div class="modal-bg" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h2 id="mTitle"></h2>
+    <p id="mDesc"></p>
+    <div id="mBody"></div>
+    <div class="err" id="mErr" role="alert"></div>
+    <div class="m-actions">
+      <button class="btn danger-ghost" id="mDanger" hidden></button>
+      <button class="btn ghost" id="mCancel">Cancelar</button>
+      <button class="btn primary" id="mOk"></button>
+    </div>
+  </div>
+</div>
+
+<div class="ctx" id="ctxMenu" role="menu" hidden></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

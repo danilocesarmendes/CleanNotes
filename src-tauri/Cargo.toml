@@ -1,0 +1,33 @@
+[package]
+name = "cleannotes"
+version = "0.1.0"
+description = "CleanNotes: bloco de notas em Markdown para quem trabalha com TI"
+authors = ["cleandev"]
+edition = "2021"
+
+[lib]
+name = "cleannotes_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-opener = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-autostart = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Cofre do sistema para variáveis marcadas como segredo: Credential Manager (Windows),
+# Keychain (macOS) e Secret Service (Linux). Nunca grava o valor em arquivo.
+[target.'cfg(windows)'.dependencies]
+keyring = { version = "3", features = ["windows-native"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring = { version = "3", features = ["apple-native"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3", features = ["sync-secret-service", "crypto-rust"] }
